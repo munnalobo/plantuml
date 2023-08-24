@@ -25,7 +25,7 @@ import java.util.stream.Stream;
 @Slf4j
 public class LogEntryAspect {
     private Tracer tracer;
-    private String packageName;
+    private String packageName = "com.neuron.plantuml";
 
     public LogEntryAspect() {
     }
@@ -42,7 +42,10 @@ public class LogEntryAspect {
 
     private void saveLog(JoinPoint joinPoint, Instant executionTime, boolean returningCall) {
         List<String> classExclusionList = List.of("Aspect", "Signature", "$", "set", "get", "aroundBody", "<generated>");
-        List<StackTraceElement> aspect = Arrays.stream(Thread.currentThread().getStackTrace()).filter(x -> x.getClassName().contains(packageName)).filter(x -> classExclusionList.stream().noneMatch(y -> x.getClassName().contains(y))).collect(Collectors.toList());
+        List<StackTraceElement> aspect = Arrays.stream(Thread.currentThread().getStackTrace())
+                .filter(x -> x.getClassName().contains(packageName))
+                .filter(x -> classExclusionList.stream().noneMatch(y -> x.getClassName().contains(y)))
+                .collect(Collectors.toList());
         if (!aspect.isEmpty()) {
             String currentMethodName = joinPoint.getSignature().getName();
             String currentClassName = joinPoint.getSignature().getDeclaringType().getSimpleName();
