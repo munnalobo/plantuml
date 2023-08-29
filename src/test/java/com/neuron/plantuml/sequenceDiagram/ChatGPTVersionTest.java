@@ -12,11 +12,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class ChatGPTVersionTest {
 
-  ChatGPTVersion chatGPTVersion;
+  //"1","2","3","4","5","3","6","7","1","2","3","4","5","3","6","7"
+  ChatGPTVersion2 chatGPTVersion;
 
   @BeforeEach
   void setUp() {
-    chatGPTVersion = new ChatGPTVersion();
+    chatGPTVersion = new ChatGPTVersion2();
 
   }
 
@@ -80,6 +81,12 @@ public class ChatGPTVersionTest {
             "[1] -> 6"
         ))},
         new Object[]{Arrays.asList("1", "2", "2", "1", "1", "2", "2", "1", "1", "2", "2", "1"),
+            new LinkedList<>(Arrays.asList(
+                "[1] -> 1, [2] -> 2, [1] -> 2, [2] -> 2, [1] -> 2, [2] -> 2, [1] -> 1"
+            ))},
+        new Object[]{
+            Arrays.asList("1", "2", "3", "4", "5", "3", "6", "7", "1", "2", "3", "4", "5", "3", "6",
+                "7"),
             new LinkedList<>(Arrays.asList(
                 "[1] -> 1, [2] -> 2, [1] -> 2, [2] -> 2, [1] -> 2, [2] -> 2, [1] -> 1"
             ))}
